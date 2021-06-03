@@ -36,7 +36,7 @@ uniq_name = str(uuid.uuid4())
 
 
 total_step = st.sidebar.selectbox(
-    'total steps', [10, 50, 100, 300, 500, 1000, 1500, 2000], index=0)
+    'total steps', [10, 50, 100, 300, 500, 1000, 1500, 2000], index=3)
 
 max_size = 400
 
@@ -44,7 +44,7 @@ max_size = 400
 style_weight = st.sidebar.slider("Style Weight", 100, 500, value=200)
 
 sample_step = st.sidebar.selectbox('Sample Steps after which to display output', [
-                                   10, 50, 100, 500], index=0)
+                                   5, 10, 50, 100, 500], index=2)
 
 log_step = st.sidebar.selectbox(
     'Steps after which to display progress', [1, 2, 5, 10, 25, 50], index=1)
@@ -170,6 +170,7 @@ if st.button("Run"):
             torchvision.utils.save_image(img, name)
             st.image(Image.open(name),
                      "Image after {} steps.".format(step + 1))
+            os.remove(name)
 else:
     st.write("Press Run to Execute.")
 
